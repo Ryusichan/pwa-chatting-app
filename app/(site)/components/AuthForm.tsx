@@ -52,6 +52,7 @@ const AuthForm = () => {
       // 서버에 데이터를 새로 생성하고자 할 때 사용 data는 json 형태로 전달
       axios
         .post("/api/register", data)
+        .then(() => signIn("credentials", data))
         // toast를 이용하여 에러 메시지 띄움
         .catch(() => toast.error("Something went wrong!"))
         .finally(() => setIsLoading(false));
@@ -70,6 +71,7 @@ const AuthForm = () => {
 
           if (callback?.ok && !callback?.error) {
             toast.success("Logged in successfully");
+            router.push("/users");
           }
         })
         .finally(() => setIsLoading(false));
