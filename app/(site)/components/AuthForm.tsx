@@ -7,6 +7,8 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import { BsGithub, BsGoogle } from "react-icons/bs";
+import { toast } from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 type Variant = "LOGIN" | "REGISTER";
 
@@ -38,11 +40,30 @@ const AuthForm = () => {
     setIsLoading(true);
     if (variant === "REGISTER") {
       // Axios Register
-      axios.post("/api/register", data);
+      // 서버에 데이터를 새로 생성하고자 할 때 사용 data는 json 형태로 전달
+      axios
+        .post("/api/register", data)
+        // toast를 이용하여 에러 메시지 띄움
+        .catch(() => toast.error("Something went wrong!"))
+        .finally(() => setIsLoading(false));
     }
 
     if (variant === "LOGIN") {
       // NextAuth SignIn
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+      })
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error("Invalid credentials");
+          }
+
+          if (callback?.ok && !callback?.error) {
+            toast.success("Logged in successfully");
+          }
+        })
+        .finally(() => setIsLoading(false));
     }
   };
 
@@ -50,6 +71,19 @@ const AuthForm = () => {
     setIsLoading(true);
 
     // NextAuth Social SignIn
+    signIn(action, {
+      redirect: false,
+    })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error("SocialLogin Something went wrong!");
+        }
+
+        if (callback?.ok && !callback?.error) {
+          toast.success("Logged in successfully");
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
