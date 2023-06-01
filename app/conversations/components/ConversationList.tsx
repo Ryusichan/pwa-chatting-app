@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FullConversationType } from "../types";
+import { FullConversationType } from "../../types";
 import { useRouter } from "next/navigation";
 import useConversation from "@/app/hooks/useConversation";
 import { MdOutlineGroupAdd } from "react-icons/md";

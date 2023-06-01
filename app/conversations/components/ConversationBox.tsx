@@ -6,9 +6,9 @@ import { Conversation, Message, User } from "@prisma/client";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import clsx from "clsx";
-import { FullConversationType } from "../types";
-import useOtherUser from "../hooks/useOtherUser";
-import Avatar from "../components/Avatar";
+import { FullConversationType } from "../../types";
+import useOtherUser from "../../hooks/useOtherUser";
+import Avatar from "../../components/Avatar";
 
 interface ConversationBoxProps {
   data: FullConversationType;
