@@ -14,8 +14,7 @@ export default async function UsersLayout({
     // @ts-expect-error Server Component
     <SideBar>
       <div className="h-full">
-        <UserList />
-        {/* <UserList items={users} /> */}
+        <UserList items={users} />
         {children}
       </div>
     </SideBar>
