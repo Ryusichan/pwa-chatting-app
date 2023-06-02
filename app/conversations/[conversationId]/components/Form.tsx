@@ -45,7 +45,7 @@ const Form = () => {
       <HiPhoto size={30} className="text-sky-500" />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex items-center lg:gap-4 w-full"
+        className="flex items-center lg:gap-4 w-full"
       >
         <MessageInput
           id="message"
