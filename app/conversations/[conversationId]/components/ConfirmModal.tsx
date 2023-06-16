@@ -20,7 +20,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ isOpen, onClose }) => {
   const { conversationId } = useConversation();
   const [isLoading, setIsLoading] = useState(false);
 
-  // 대화 삭제하기 axios 요청
+  // 대화 삭제하기 axios request
   const onDelete = useCallback(() => {
     setIsLoading(true);
 
